@@ -4,9 +4,9 @@ This is a personal contact manager.
 Website can be found at http://cop4331-group6.com/ 
 
 # Group 6
-Ahal Saias
-Alissa Forde
-Ashley Yang
-Gabriel Antonio Alvim D Arco
-Naomi Mbwambo
-Serina Suresh Chugani
+1. Ahal Saias
+2. Alissa Forde
+3. Ashley Yang
+4. Gabriel Antonio Alvim D Arco
+5. Naomi Mbwambo
+6. Serina Suresh Chugani
