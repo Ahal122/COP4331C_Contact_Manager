@@ -46,6 +46,7 @@ tfoot {
      color: black;
 }
 
+<<<<<<< HEAD
 /* Add a color to the active/current link */
 .topnav a.active {
       background-color: #B6410F;
@@ -110,3 +111,10 @@ tfoot {
 body {
     background-image: url('../images/contactsbg.jpg');
 }
+=======
+        /* Add a color to the active/current link */
+        .topnav a.active {
+            background-color: #00ffffbd;
+            color: white;
+      }
+>>>>>>> 75dfa26b9ba8d499e2ae43c3c795e35e6ffe145b
