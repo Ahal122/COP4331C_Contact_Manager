@@ -1,21 +1,62 @@
+/* login form */
+.form {
+    border-radius: 17px;
+    position: relative;  
+    max-width: 400px;
+    margin: 0 auto 100px;
+    top: -110px;
+    padding: 45px;
+    text-align: center;
+    border: 2px;
+    overflow: hidden;
+    border-color: black;
+    height: 360px;
+    transition: .6s;
+
+}
+
 /* box around login */
-#rcorners {
-    border: 1px solid black;
-    margin: auto;
-    position: relative;
-    padding: 20px;
-    width: 280px;
-    height: 400px;
-    background: rgba(20, 33, 44, 0.9);
-    box-shadow: 0 0 25px 0 rgba(137, 114, 97, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+#login {
+      
+      
+      margin: auto;
+      top: 25px;
+      position: relative;
+      padding: 20px;
+      width: 280px;
+      height: 400px;
+      
+      
   }
 
   #inputBox {
-    width: 280px;
-    height: 35px;
-    margin-bottom: 10px;
-    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
   }
+  #inputBox:focus {
+    border: 3px solid #555;
+  }
+
+  .input-field {
+    border-radius: 17px;
+    font-family: 'Montserrat';
+    outline: 0;
+    background: #f2f2f2;
+    border: 2px solid black;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    position: relative;
+}
 
   #button {
     border-radius: 25px solid black;
@@ -25,7 +66,7 @@
 
   h1 {
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    font-family: an ;
   }
 
   /* Add a black background color to the top navigation */
@@ -58,7 +99,6 @@
 }
 
 body {
-  background-color: #F3B02E;
   background-image: url('../images/background.jpg');
   background-position: center center;
   background-repeat: no-repeat;
@@ -68,19 +108,3 @@ body {
   overflow: hidden;
 }
 
-/* login form */
-.form {
-  border-radius: 17px;
-  position: relative;
-  background: rgba(155, 188, 115, 0.9);
-  max-width: 350px;
-  margin: 0 auto 100px;
-  top: -110px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  overflow: hidden;
-  height: 360px;
-  transition: .6s;
-
-}
