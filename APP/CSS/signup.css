@@ -1,4 +1,4 @@
-/* login form */
+/* signup form */
 .form {
   border-radius: 17px;
   position: relative;  
@@ -15,8 +15,8 @@
 
 }
 
-/* box around login */
-#login {
+/* box around signup */
+#signup {
     margin: auto;
     border: 1px solid black;
     box-shadow: 0 0 25px 0 rgba(137, 114, 97, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
