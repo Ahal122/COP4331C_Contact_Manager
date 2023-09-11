@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../CSS/login.css" />
         <title>User login</title>
+        <script type="text/javascript" src="userLogic.js"></script>
     </head>
     
     
@@ -13,12 +14,12 @@
     </div> 
 
     <body>
-        <form class="container" id="rcorners">
+        <form class="container" id="rcorners" >
             <h1>User Login</h1>
             <input type="text" class="input-field" id="inputBox" placeholder="username" required
             pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}$"/>
             <input type="text" class="input-field" id="inputBox" placeholder="password" />
-            <button type="button" id="button" class="submit-btn">Login</button>
+            <button type="button" id="button" class="submit-btn" onclick="doLogin()" >Login</button>
         </form>
     </body>
 </html>
