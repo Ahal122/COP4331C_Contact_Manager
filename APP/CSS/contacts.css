@@ -3,6 +3,7 @@ td {
     border-collapse: collapse;
     text-align: center;
     border-bottom: 1px solid beige;
+    background-color: #355b7d1a;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 1300px;
     padding: 20px 20px;
@@ -14,7 +15,7 @@ td {
 
 thead,
 tfoot {
-    background-color: #f67280;
+    background-color:#355c7d;
     color: black;
     font-size: 16px;
     height: 50px;
@@ -25,7 +26,7 @@ tfoot {
 
 /* Add a brown background color to the top navigation */
 .topnav {
-    background-color: #355c7d;
+    background-color: #F8B195;
     overflow: auto;
     width: 100%;
 }
@@ -46,7 +47,6 @@ tfoot {
      color: black;
 }
 
-<<<<<<< HEAD
 /* Add a color to the active/current link */
 .topnav a.active {
       background-color: #B6410F;
@@ -54,7 +54,7 @@ tfoot {
 }
 
 .button {
-    background-color: #f67280;
+    background-color: #8e6656;
     color: beige;
     border: none;
     text-align: center;
@@ -91,7 +91,7 @@ tfoot {
 
 .searchnav {
     overflow: hidden;
-    background-color: #f8b195;
+    
     width: 100%;
     padding: 1px 650px;
     margin: 70px 5px;
@@ -110,11 +110,12 @@ tfoot {
 
 body {
     background-image: url('../images/contactsbg.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    overflow: hidden;
 }
-=======
-        /* Add a color to the active/current link */
-        .topnav a.active {
-            background-color: #00ffffbd;
-            color: white;
-      }
->>>>>>> 75dfa26b9ba8d499e2ae43c3c795e35e6ffe145b
+
+
