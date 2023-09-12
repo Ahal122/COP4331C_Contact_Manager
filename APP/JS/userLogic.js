@@ -111,10 +111,15 @@ function doLogout()
 
 function addUser()
 {
+	let firstname = document.getElementById("First Name").value;
+	let lastname = document.getElementById("Last Name").value;
+	let login = document.getElementById("login").value;
+	let password = document.getElementById("Last Name").value;
+
 	let newUser = document.getElementById("userText").value;
 	document.getElementById("userAddResult").innerHTML = "";
 
-	let tmp = {user:newuser,userId,userId};
+	let tmp = {FirstName:firstname, LastName:lastname, Login:login, Password: password};
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/sign-up.' + extension;
