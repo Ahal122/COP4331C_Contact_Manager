@@ -1,0 +1,86 @@
+/* box around login */
+#rcorners {
+    border: 1px solid black;
+    margin: auto;
+    position: relative;
+    padding: 20px;
+    width: 280px;
+    height: 400px;
+    background: rgba(20, 33, 44, 0.9);
+    box-shadow: 0 0 25px 0 rgba(137, 114, 97, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+
+  #inputBox {
+    width: 280px;
+    height: 35px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  #button {
+    border-radius: 25px solid black;
+    margin-top: 25px;
+    font-size: large;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+  }
+
+  /* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+  margin-bottom: 5cqmin;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #00ffffbd;
+  color: white;
+}
+
+body {
+  background-color: #F3B02E;
+  background-image: url('../images/background.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* login form */
+.form {
+  border-radius: 17px;
+  position: relative;
+  background: rgba(155, 188, 115, 0.9);
+  max-width: 350px;
+  margin: 0 auto 100px;
+  top: -110px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+  height: 360px;
+  transition: .6s;
+
+}

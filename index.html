@@ -1,0 +1,43 @@
+<html lang="en"></html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+	        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="../css/index.css"/>
+        <title>User login</title>        
+    </head>
+    
+    <body style=" background-color: #f8b195;">
+    </body>
+    
+    <div class="topnav">
+        <button class="nav-button" href=""> About Us</button>
+        <button class="nav-button" href="" onclick="window.location.href = 'signup.html';"> Sign-Up</button>
+        <h2 class="page-header">Hello Hub</h2>
+    </div>
+
+    <body>
+        <form class="form" id="loginBox">
+            <h1 class="header">User Login</h1>
+            <script type="text/javascript" src="js/userLogic.js"></script>
+
+            <div>
+                <label class="floating-label">Username</label>
+                <input type="text" class="inputText" id="Login" placeholder="Enter Username"
+                pattern="(?=.*[a-zA-Z])[a-zA-Z0-9-_]{3,18}$"/>
+                
+            </div>
+
+            <div>
+                <label class="floating-label">Password</label>
+                <input type="password" class="inputText" id="Password" placeholder="Enter Password" name="password"  required/>                
+            </div>
+
+            
+
+
+            <button type="button" class="submit-btn" onclick="doLogin()" >Submit</button>
+            <div class="text" id="loginResult"></div>
+        </form>
+    </body>
+</html>
