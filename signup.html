@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/signup.css" />
+        <title>User Sign-Up</title>        
+    </head>
+    
+    <body style=" background-color: #f8b195;">
+    </body>
+    
+    <div class="topnav">
+        <button class="nav-button"> About Us</button>
+        <button class="nav-button" onclick="window.location.href = 'index.html';"> Login</button>
+        <h2 class="page-header">Hello Hub</h2>
+    </div>
+
+    <body>
+        <form class="form" id="signup-box">
+            <h1 class="header">User Sign-Up</h1>
+            <script type="text/javascript" src="js/userLogic.js"></script>
+            
+            <input type="text" class="inputText" id="FirstName" placeholder="First Name" />
+            <input type="text" class="inputText" id="LastName" name ="lastname" placeholder="Last Name" />
+            <input type="text" class="inputText" id="Login" placeholder="username" required/>
+            <input type="text" class="inputText" id="Password" placeholder="password" />
+            <button type="button" class="submit-btn" onclick="addUser()" >Sign-Up</button>
+            <span class="text" id="userAddResult"></span>
+        </form>
+    </body>
+</html>
