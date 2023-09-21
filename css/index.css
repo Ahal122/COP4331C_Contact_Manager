@@ -103,6 +103,7 @@ input:focus {
 
 .submit-btn:hover {
   background: #feb599;
+  text-decoration: underline;
 }
 
 .submit-btn {

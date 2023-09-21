@@ -27,18 +27,33 @@
   <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Add New Contact</h5>
+        <div class="modal-header text-center">
+          <h5 class="header" id="exampleModalLongTitle">Add New Contact</h5>
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <form id="" class="" action="" method="post">
-                <input type="text" id="contactFirstName" placeholder="First Name" name="firstName" required>
-                <input type="text" id="contactLastName" placeholder="Last Name" name="lastName" required>
-                <input type="text" id="contactPhone" placeholder="Phone" name="phoneNumber" required>
-                <input type="text" id="contactEmail" placeholder="Email" name="emailAddress" required>
+            <form id="" class="form" action="" method="post">
+                <div>   
+                    <label class="floating-label">First Name</label>
+                    <input class="inputText" type="text" id="contactFirstName" placeholder="Enter First Name" name="firstName" required>
+                </div>
+
+                <div>
+                    <label class="floating-label">Last Name</label>
+                    <input class="inputText" type="text" id="contactLastName" placeholder="Enter Last Name" name="lastName" required>
+                </div>
+
+                <div>
+                    <label class="floating-label">Phone Number</label>
+                    <input class="inputText" type="text" id="contactPhone" placeholder="Enter Phone" name="phoneNumber" required>
+                </div>
+
+                <div>
+                    <label class="floating-label">Email Address</label>
+                    <input class="inputText" type="text" id="contactEmail" placeholder="Enter Email" name="emailAddress" required>
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -99,7 +114,7 @@
                             <td>Testemail</td>
                             <td>
                                 <button class="btn btn-primary float-right">EDIT</button>
-                                <button class="btn btn-secondary float-right">DELETE</button>                        
+                                <button class="btn btn-danger float-right">DELETE</button>                        
                             </td>
                         </tr>
                     </tbody>                                        
