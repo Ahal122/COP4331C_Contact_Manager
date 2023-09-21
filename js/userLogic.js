@@ -4,6 +4,7 @@ const extension = 'php';
 let userId = 0;
 let firstName = "";
 let lastName = "";
+const ids = [];
 
 function doLogin()
 {
@@ -43,12 +44,11 @@ function doLogin()
 
 				firstName = jsonObject.FirstName;
 				lastName = jsonObject.LastName;
-
 				saveCookie();
 
 				// used to be color.html
 				window.location.href = "contacts.html";
-        loadContacts();
+				loadContacts();
 			}
 		};
 		xhr.send(jsonPayload);
@@ -87,9 +87,10 @@ function readCookie()
 		{
 			lastName = tokens[1];
 		}
-		else if( tokens[0] == "Login" )
+		else if( tokens[0] == "UserId" )
 		{
 			userId = parseInt( tokens[1].trim() );
+			return userId;
 		}
 	}
 
@@ -229,11 +230,12 @@ function showTable()
 
 function loadContacts()
 {
+  let userId = readCookie();
   let tmp = 
   {
     FirstName: "",
     LastName: "",
-    UserID: 1
+    UserID: userId
   };
   
   let jsonPayload = JSON.stringify(tmp);
@@ -257,7 +259,7 @@ function loadContacts()
           return;
         }
         
-        //let text = "<table border='1'>"
+        let text = "<table border='1'>"
         
         for (let i = 0; i < jsonObject.results.length; i++) 
         {
@@ -295,8 +297,7 @@ function addContact()
 	let lastName = document.getElementById("contactLastName").value;
 	let phoneNumber = document.getElementById("contactPhone").value;
 	let emailAddress = document.getElementById("contactEmail").value;
-	let userId = userId;
-
+	let userId = readCookie();
 	let tmp =
 	{
 		FirstName: firstName,
@@ -326,8 +327,9 @@ function addContact()
 	newRow.appendChild(email);
 
 	contactTableNew.appendChild(newRow);
-    //closeForm();
-    //document.getElementById("myForm").reset();
+  var contactFormDisplay = document.getElementById("addContact");
+	contactFormDisplay.style.display = "none";
+ 
 
     let jsonPayload = JSON.stringify(tmp);
 	let url = urlBase + '/addContacts.' + extension;
@@ -340,13 +342,11 @@ function addContact()
 	{
 		xhr.onreadystatechange = function ()
 		{
-     console.log(this.readyState);
-     console.log(this.status);
 			if (this.readyState == 4 && this.status == 200)
 			{
 				console.log("Contact Added!");
-				showTable();
-				//document.getElementById("myForm").reset();
+				loadContacts();
+				document.getElementById("addContact").reset();
 			}
 		};
 		xhr.send(jsonPayload);
