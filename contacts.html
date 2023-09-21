@@ -13,12 +13,12 @@
     </body>
 
     <div class="topnav">
-        <button onclick="doLogout()" class="navbutton"> Logout</button>
+        <button onclick="doLogout()" class="nav-button"> Logout</button>
         <h2 class="page-header">Hello Hub</h2>
     </div>
     
     
-    <button onclick="loadContacts()"> Refresh </button>
+    
     
 
   <!-- Button trigger modal -->
@@ -27,18 +27,33 @@
   <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Add New Contact</h5>
+        <div class="modal-header text-center">
+          <h5 class="header" id="exampleModalLongTitle">Add New Contact</h5>
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <form id="" class="" action="" method="post">
-                <input type="text" id="contactFirstName" placeholder="First Name" name="firstName" required>
-                <input type="text" id="contactLastName" placeholder="Last Name" name="lastName" required>
-                <input type="text" id="contactPhone" placeholder="Phone" name="phoneNumber" required>
-                <input type="text" id="contactEmail" placeholder="Email" name="emailAddress" required>
+            <form id="" class="form" action="" method="post">
+                <div>   
+                    <label class="floating-label">First Name</label>
+                    <input class="inputText" type="text" id="contactFirstName" placeholder="Enter First Name" name="firstName" required>
+                </div>
+
+                <div>
+                    <label class="floating-label">Last Name</label>
+                    <input class="inputText" type="text" id="contactLastName" placeholder="Enter Last Name" name="lastName" required>
+                </div>
+
+                <div>
+                    <label class="floating-label">Phone Number</label>
+                    <input class="inputText" type="text" id="contactPhone" placeholder="Enter Phone" name="phoneNumber" required>
+                </div>
+
+                <div>
+                    <label class="floating-label">Email Address</label>
+                    <input class="inputText" type="text" id="contactEmail" placeholder="Enter Email" name="emailAddress" required>
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -52,66 +67,63 @@
     
 
     <!-- The form -->
-    <div class="wrapper">
-        <div class="col">
-            <div class="">
-                <div class="card"> 
-                    <div class="card-header">
-                        <h1 class="upper-table-header">CONTACTS</h1>
+    <div class="wrapper">  
+
+        <div class="card"> 
+            
+            <div class="card-header">
+                <h1 class="upper-table-header">CONTACTS</h1>
+            </div>
+
+            <div class="container">
+                
+                <div class="row align-items-center">
+                    
+                    <div class="col">
+                        <button class="add-button float-right" type="button" data-bs-toggle="modal" data-bs-target="#addContact"> Add</button>
+                    </div>
+                    
+                    <div class="col align-items-center">                                    
+                        <input type="text" class="search-box"  placeholder="Search..." />                                                 
                     </div>
 
-                        <div class="container">
-                            
-                            <div class="row align-items-center">
-                               
-                                <div class="col"></div>
-                                
-                                <div class="col align-items-center">
-                                    
-                                    <input type="text" class="search-box"  placeholder="Search..." />             
-                                    <button type="button" class="search-button" onclick=""> <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
-                                </div>
+                    <div class="col">
+                        <button type="button" class="search-button" onclick=""> <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+                        <button class="refresh-button" onclick="loadContacts()"><i class="fa-solid fa-arrows-rotate" style="color: #ffffff;"></i></button>                                    
+                    </div>
 
-                                <div class="col">
-                                    <button type="button" onclick="" class="add-button" data-bs-toggle="modal" data-bs-target="#addContact"> Add</button>
-                                </div>
+                </div>
 
-                            </div>
-                        </div>
+            </div>
 
-      
+                <table class="" id="contactTable">         
+                    <thead>
+                        <tr>
+                            <th scope="col" style="color:white">First Name</th>
+                            <th scope="col" style="color:white">Last Name</th>
+                            <th scope="col" style="color:white">Phone Number</th>
+                            <th scope="col" style="color:white">Email Address</th>
+                            <th scope="col" style="color:white">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>TestFirst</td>
+                            <td>TestLast</td>
+                            <td>Testemail</td>
+                            <td>
+                                <button class="btn btn-primary float-right">EDIT</button>
+                                <button class="btn btn-danger float-right">DELETE</button>                        
+                            </td>
+                        </tr>
+                    </tbody>                                        
+                </table> 
 
-
-
-                            <table class="" id="contactTable">         
-                                <thead>
-                                    <tr>
-                                        <td scope="col" style="color:beige">First Name</td>
-                                        <td scope="col" style="color:beige">Last Name</td>
-                                        <td scope="col" style="color:beige">Number</td>
-                                        <td scope="col" style="color:beige">Email</td>
-                                        <td scope="col" style="color:beige">Actions</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>TestFirst</td>
-                                        <td>TestLast</td>
-                                        <td>Testemail</td>
-                                        <td>
-                                            <button class="btn btn-primary">EDIT</button>
-                                            <button class="btn btn-secondary">DELETE</button>                        
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                        
-                            </table> 
-                        </div>
-                    
-                </div>              
-            </div> 
+            </div>
+            
         </div>
+
     </div>
 
 

@@ -1,113 +1,173 @@
-/* Add a pink background color to the top navigation */
+/* Start of Navigation bar */
 .topnav {
     background-color: #F8B195;
     overflow: auto;
     width: 100%;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
+  }
+  
+  .nav-button {
     float: right;
-    color: 6A2F00;
-    text-align: center;
-    padding: 14px 30px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-     background-color: #ddd;
-     color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-      background-color: #B6410F;
-      color: white;
-}
-
-
-/* header of page */
-.page-header {
-    color: beige;
+    border-radius: 17px;
+    text-transform: uppercase;
+    background: #8e6656;
+    box-shadow: 0 0 25px 0 rgba(137, 114, 97, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    width: 180px;
+    height: 55px;
+    padding: 15px;
+    color: #FFFFFF;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-left: 30px;
-} 
-/* style of link buttons*/
-.navbutton {
-    border-radius: 20px;
-    background-color: #8e6656;
-    color: beige;
-    border: none;
-    float:right;
+    font-size: 14px;
     text-align: center;
-    padding: 12px 45px;
-    margin: 5px 5px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin-right: 18px;
+    margin-top: 10px;
+    border: 0;
+  }
+  
+  .nav-button:hover {
+    background: #f2f2f2;
+    color: black;
+    text-decoration: underline;
+  }
+  
+  .page-header {
+    color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 45px;
+    text-decoration-thickness: 200px;
+    margin:10px;
+  }
+/* End of navigation bar */
+
+
+/* Start of Header section on page */
+.upper-table-header {
+    text-align: center;
+    font-size: 60px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #355c7d;
 }
 
-
-/* style of add button */
 .add-button {
-    border-radius: 20px;
-    background-color: #8e6656;
-    color: beige;
-    border: none;
-    float:right;
-    text-align: center;
-    padding: 12px 45px;
-    margin: 1px 1px;
+    float: right;
+    border-radius: 17px;
+    text-transform: uppercase;
+    background: #8e6656;
+    box-shadow: 0 0 25px 0 rgba(137, 114, 97, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    width: 80px;
+    height: 50px;
+    padding: 12px;
+    color: #FFFFFF;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
 } 
 
 .add-button:hover {
-    background-color: #ddd;
-    color: black;
+    background: #feb599;
+    text-decoration: underline;
 }
 
-
 .search-box {
+    text-align: center;
     border-radius: 10px;
-    width: 89%;
+    width: 100%;
     height: 40px;
     position: left; 
+}
+
+.search-box:focus {
+    border: 4px solid #555;
 }
 
 .search-button {
     border-radius: 10px;
     padding: 10px;
     background: #F8B195;
+    margin-right: 5px;
 }
 
+.search-button:hover {
+    background:#8e6656;
+}
+
+.refresh-button {
+    border-radius: 10px;
+    padding: 10px;
+    background: #F8B195;
+}
+
+.refresh-button:hover {
+    background:#8e6656;
+    
+}
+/* End of Header section on page */
+
+
+/* Start of Add Contacts Form */
+form{
+    text-align: center;
+}
+
+.header{
+    text-align: center;
+    font-size: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif ;  
+  }
+
+  .floating-label {
+    position: absolute;
+    font-family: Verdana, Geneva, Tahoma, sans-serif ;    
+  }
+  
+  input:focus {
+    border: 5px solid #555;
+  } 
+  
+  .inputText {
+    border-radius: 17px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif ;
+    background: #f2f2f2;
+    width: 75%;
+    height: 55px;
+    margin-bottom: 18px;
+    margin-top: 25px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-decoration: solid; 
+    position: relative;
+  }
+/* End of Add Contacts Form */
+
+
+/* Start of table formatting */
 .wrapper{
     width: min(1600px, 100% - 3rem);
+    margin-top: 10px;
     margin-inline: auto;
 }
 
 table {
     border-collapse: collapse;
-    text-align: center;
     border-bottom: 1px solid beige;
     background-color: #ffffff1a;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 100%;
-    padding: 20px 20px;
+    padding: 5px 20px;
     border-left: hidden;
     color: #355c7d;
-    margin-left: auto;
-    margin-right: auto;
+  
 }
 
-th,
-td {
-    padding: 1rem;
-}
-
-
-
-thead,
-tfoot {
+thead{
+    text-align: center;
     background-color:#355c7d;
     color: black;
     font-size: 16px;
@@ -115,14 +175,22 @@ tfoot {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     border: none;
     border-bottom: hidden;
+    padding: 1rem;
+}
+td {
+    text-align: center;
 }
 
-.upper-table-header {
-    text-align: center;
-    font-size: 60px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #355c7d;
+th {
+    text-align: right;
 }
+
+.btn:hover{
+    text-decoration: underline;
+}
+
+/* End of table formatting */
+
 
 body {
     background-image: url('../images/contactsbg.jpg');
