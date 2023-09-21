@@ -52,7 +52,6 @@
   width: 300px;
   height: 600px;
   
-  
 }  
 
 /*Start of signup form */
@@ -63,7 +62,7 @@
   margin: 0 auto 100px;
   top: -110px;
   padding: 45px;
-  text-align: center;
+  /*text-align: center;*/
   border: 2px;
   overflow: hidden;
   border-color: black;
@@ -75,8 +74,10 @@
 .header{
   font-size: 35px;
   font-family: Verdana, Geneva, Tahoma, sans-serif ; 
-  margin-top: 20px;
-  margin-bottom: 30px; 
+  margin-top: 16px;
+  margin-bottom: 26px; 
+  text-align: center;
+  font-weight:bolder;
 }
 
 .floating-label {
@@ -95,8 +96,8 @@ input:focus {
   width: 100%;
   height: 55px;
   margin: 0 0 15px;
-  margin-bottom: 18px;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-top: 12px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 16px;
@@ -123,15 +124,23 @@ input:focus {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
-  margin-top: 16px;
+  margin-top: 25px;
   border: 0;
 }
 
 .text {
   margin-top: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
 }
+
+label {
+  margin-left: 8px;
+  margin-bottom: -12px;
+}
+
+
 /* End of form */
 
 
@@ -145,5 +154,4 @@ background-size: cover;
 margin: 0;
 overflow: hidden;
 }
-
 
