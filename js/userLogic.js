@@ -264,6 +264,7 @@ function loadContacts()
         for (let i = 0; i < jsonObject.results.length; i++) 
         {
           ids[i] = jsonObject.results[i].ID
+		  console.log(ids);
           text += "<tr id='row" + i + "'>"
           text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
           text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
@@ -321,6 +322,7 @@ function addContact()
 	phoneNum.innerText = phoneNumber;
 	email.innerText = emailAddress;
 
+	newRow.dataset.id = uniqueId;
 	newRow.appendChild(fn);
 	newRow.appendChild(ln);
 	newRow.appendChild(phoneNum);
@@ -344,6 +346,8 @@ function addContact()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
+				let jsonObject = JSON.parse(xhr.responseText);
+				let ID = jsonObject["ID"];
 				console.log("Contact Added!");
 				loadContacts();
 				document.getElementById("addContact").reset();
@@ -385,4 +389,44 @@ function searchContacts()
 		}
 	}
 	
+}
+
+
+function updateContact() {
+	let firstName = document.getElementById("contactFirstName").value;
+	let lastName = document.getElementById("contactLastName").value;
+	let phoneNumber = document.getElementById("contactPhone").value;
+	let emailAddress = document.getElementById("contactEmail").value;
+	let ID = readCookie();
+    
+    document.getElementById("updateUserResult").innerHTML = "";
+    
+	let updatePayload =
+	{
+		ID: ID,
+		FirstName: firstName,
+		LastName: lastName,
+		Phone: phoneNumber,
+		Email: emailAddress,
+	};
+    
+    let jsonPayload = JSON.stringify(updatePayload);
+    let url = urlBase + '/UpdateUser.' + extension;
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("updateUserResult").innerHTML = "User has been updated";
+            } else if (this.readyState == 4) {
+                document.getElementById("updateUserResult").innerHTML = "Failed to update user";
+            }
+        };
+
+        xhr.send(jsonPayload);
+    } catch (err) {
+        document.getElementById("updateUserResult").innerHTML = err.message;
+    }
 }

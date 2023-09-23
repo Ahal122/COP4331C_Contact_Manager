@@ -16,7 +16,9 @@
 	else
 	{
 			$stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, Phone, Email, UserID) VALUES('$firstName','$lastName','$phoneNumber','$emailAddress','$userId')");
-			$stmt->execute();
+			if ($stmt->execute()) {
+				$last_id = $conn->insert_id;
+			}
 			$stmt->close();
 			$conn->close();
 			returnWithInfo($firstName, $lastName, $phoneNumber, $emailAddress, $userId);
@@ -39,9 +41,9 @@
 		sendResultInfoAsJson( $retValue );
 	}
 
-	function returnWithInfo($firstName, $lastName, $phoneNumber, $emailAddress, $userId)
+	function returnWithInfo($ID, $firstName, $lastName, $phoneNumber, $emailAddress, $userId)
 	{
-		$retValue = '{"FirstAdded":"' . $firstName . '", "LastAdded":"' . $lastName . '", "PhoneAdded":"' . $phoneNumber . '", "EmailAdded":"' . $emailAddress . '", "IdAdded":' . $userId . ', "error":""}';
+		$retValue = '{"ID":"' . $ID . '", "FirstAdded":"' . $firstName . '", "LastAdded":"' . $lastName . '", "PhoneAdded":"' . $phoneNumber . '", "EmailAdded":"' . $emailAddress . '", "IdAdded":' . $userId . ', "error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 ?>
