@@ -159,74 +159,6 @@ function addUser()
 
 }
 
-function searchUser()
-{
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("userSearchResult").innerHTML = "";
-
-	let userList = "";
-
-	let tmp = {search:srch,userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/SearchUsers.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200)
-			{
-				document.getElementById("userSearchResult").innerHTML = "user(s) has been retrieved";
-				let jsonObject = JSON.parse( xhr.responseText );
-
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					userList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						userList += "<br />\r\n";
-					}
-				}
-
-				document.getElementsByTagName("p")[0].innerHTML = userList;
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("userSearchResult").innerHTML = err.message;
-	}
-
-}
-
-function openForm()
-{
-	var addForm = document.getElementById("myForm");
-	var contactTableDisplay = document.getElementById("contactTable");
-
-	addForm.style.display = "block";
-	contactTableDisplay.style.display = "none"; 
-}
-
-function closeForm()
-{
-	var addForm = document.getElementById("myForm");
-	var contactTableDisplay = document.getElementById("contactTable");
-
-	addForm.style.display = "none";
-	contactTableDisplay.style.display = "block";
-}
-
-function showTable()
-{
-	var contactTableDisplay = document.getElementById("contactTable");
-	contactTableDisplay.style.display = "block";
-}
 
 function loadContacts()
 {
@@ -265,12 +197,12 @@ function loadContacts()
         {
           ids[i] = jsonObject.results[i].ID
   		  //console.log(ids);
-		  text += edit(ids[i]);
+		  text += edit(ids[i] , jsonObject.results[i].FirstName, jsonObject.results[i].LastName, jsonObject.results[i].Phone, jsonObject.results[i].Email);
           text += "<tr id='row" + ids[i] + "'>"
           text += "<td id='first_Name" + ids[i] + "'>" + jsonObject.results[i].FirstName + "</td>";
           text += "<td id='last_Name" + ids[i] + "'>" + jsonObject.results[i].LastName + "</td>";
-          text += "<td id='email" + ids[i] + "'>" + jsonObject.results[i].Email + "</td>";
-          text += "<td id='phone" + ids[i] + "'>" + jsonObject.results[i].Phone + "</td>";
+          text += "<td id='email" + ids[i] + "'>" + jsonObject.results[i].Phone + "</td>";
+          text += "<td id='phone" + ids[i] + "'>" + jsonObject.results[i].Email + "</td>";
           text += "<td>" +
             "<button type='button' class='btn btn-primary float-right' data-bs-toggle='modal' data-bs-target='#editContact" + ids[i] + "' id='btn" + i + "' onclick='edit(" + ids[i] + ")'>Edit</button>" +
             "<button type='button' class='btn btn-danger float-right' id='btn" + i + "' onclick='deleteContact(" +  ids[i] + ")'>Delete</button>" + "</td>";
@@ -280,18 +212,6 @@ function loadContacts()
         
         text += "</table>"
         document.getElementById("tbody").innerHTML = text;
-		
-		// var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-		// var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-		// return new bootstrap.Popover(popoverTriggerEl, {trigger: 'manual'});
-
-		// 	popoverTriggerEl.addEventListener('input', function() {
-		// 		// If the input has a value, hide the popover
-		// 		if (popoverTriggerEl.value.trim()) {
-		// 			popoverInstance.hide();
-		// 		}
-		// 	});
-		// });
 
 		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
@@ -322,48 +242,48 @@ function loadContacts()
 }
 
 
-	function edit(ID) {
-		form = "";
+function edit(ID, firstName, lastName, phone, email) {
+	form = "";
 
-		form += "<div class='modal fade' id='editContact"+ ID + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>" +
-		"    <div class='modal-dialog' role='document'>" +                                                                                            
-		"      <div class='modal-content'>" +                                                                                                         
-		"        <div class='modal-header text-center'>" +                                                                                            
-		"          <h5 class='header' id='exampleModalLongTitle'>Update Contact</h5>" +                                                              
-		"          <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'>" +                                                 
-		"            <span aria-hidden='true'>&times;</span>" +                                                                                       
-		"          </button>" +                                                                                                                       
-		"        </div>" +                                                                                                                            
-		"        <div class='modal-body'>" +                                                                                                          
-		"            <form id='clearForm" + ID + "' class='form' method='post'>" +                                                                             
-		"                <div>" +                                                                                                                     
-		"                    <label class='floating-label'>First Name</label>" +                                                                      
-		"                    <input class='inputText' type='text' id='contactFirstName"+ ID + "' placeholder='Enter First Name' name='firstName' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a first name.'>" +  
-		"                </div>" +                                                                                                                    
-		"                <div>" +                                                                                                                     
-		"                    <label class='floating-label'>Last Name</label>" +                                                                       
-		"                    <input class='inputText' type='text' id='contactLastName"+ ID + "' placeholder='Enter Last Name' name='lastName' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a Last name.'>" +     
-		"                </div>" +                                                                                                                    
-		"                <div>" +                                                                                                                     
-		"                    <label class='floating-label'>Phone Number</label>" +                                                                    
-		"                    <input class='inputText' type='text' id='contactPhone"+ ID + "' placeholder='Enter Phone' name='phoneNumber' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a Phone Number.'>" +         
-		"                </div>" +                                                                                                                    
-		"                <div>" +                                                                                                                     
-		"                    <label class='floating-label'>Email Address</label>" +                                                                   
-		"                    <input class='inputText' type='text' id='contactEmail"+ ID + "' placeholder='Enter Email' name='emailAddress' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter an Email.'>" +        
-		"                </div>" +                                                                                                                    
-		"            </form>" +                                                                                                                       
-		"        </div>" +                                                                                                                            
-		"        <div class='modal-footer'>" +                                                                                                        
-		"          <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' onclick='clearForm('clearForm" + ID + "' , 'editContact"+ ID + "')'>Close</button>" +                                          
-		"          <button type='submit' class='btn btn-primary' onclick='updateContact(" + ID + ")'>Save changes</button>" +                                      
-		"        </div>" +                                                                                                                            
-		"      </div>" +                                                                                                                              
-		"    </div>" +
-		"   </div>";    
-		
-		return form;
-	}
+	form += "<div class='modal fade' id='editContact"+ ID + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>" +
+	"    <div class='modal-dialog' role='document'>" +                                                                                            
+	"      <div class='modal-content'>" +                                                                                                         
+	"        <div class='modal-header text-center'>" +                                                                                            
+	"          <h5 class='header' id='exampleModalLongTitle'>Update Contact</h5>" +                                                              
+	"          <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'>" +                                                 
+	"            <span aria-hidden='true'>&times;</span>" +                                                                                       
+	"          </button>" +                                                                                                                       
+	"        </div>" +                                                                                                                            
+	"        <div class='modal-body'>" +                                                                                                          
+	"            <form id='clearForm-" + ID + "' class='form' method='post'>" +                                                                             
+	"                <div>" +                                                                                                                     
+	"                    <label class='floating-label'>First Name</label>" +                                                                      
+	"                    <input class='inputText' type='text' id='contactFirstName"+ ID + "' placeholder='Enter First Name' value='" + firstName + "' name='firstName' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a first name.'>" +  
+	"                </div>" +                                                                                                                    
+	"                <div>" +                                                                                                                     
+	"                    <label class='floating-label'>Last Name</label>" +                                                                       
+	"                    <input class='inputText' type='text' id='contactLastName"+ ID + "' placeholder='Enter Last Name' value='" + lastName + "' name='lastName' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a Last name.'>" +     
+	"                </div>" +                                                                                                                    
+	"                <div>" +                                                                                                                     
+	"                    <label class='floating-label'>Phone Number</label>" +                                                                    
+	"                    <input class='inputText' type='text' id='contactPhone"+ ID + "' placeholder='Enter Phone' value='" + phone + "' name='phoneNumber' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a Phone Number.'>" +         
+	"                </div>" +                                                                                                                    
+	"                <div>" +                                                                                                                     
+	"                    <label class='floating-label'>Email Address</label>" +                                                                   
+	"                    <input class='inputText' type='text' id='contactEmail"+ ID + "' placeholder='Enter Email' value='" + email + "' name='emailAddress' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter an Email.'>" +        
+	"                </div>" +                                                                                                                    
+	"            </form>" +                                                                                                                       
+	"        </div>" +                                                                                                                            
+	"        <div class='modal-footer'>" +                                                                                                        
+	"          <button type='submit' class='btn btn-secondary' onclick='clearEditForm(" + ID + ")'>Cancel</button>" +                                      
+	"          <button type='submit' class='btn btn-primary' onclick='updateContact(" + ID + ")'>Save changes</button>" +                                      
+	"        </div>" +                                                                                                                            
+	"      </div>" +                                                                                                                              
+	"    </div>" +
+	"   </div>";    
+	
+	return form;
+}
 		
 
 function deleteContact(contactID)
@@ -408,7 +328,13 @@ function clearForm(formID, modalClearID){
 	var myModalEl = document.getElementById(modalClearID);
 	var modal = bootstrap.Modal.getInstance(myModalEl)
 	modal.hide();
-	document.getElementById(formID).reset();
+}
+
+function clearEditForm(id){
+	loadContacts();
+	var myModalEl = document.getElementById("editContact" + id);
+	var modal = bootstrap.Modal.getInstance(myModalEl)
+	modal.hide();
 }
 
 function addContact()
@@ -470,11 +396,9 @@ function addContact()
 				if (this.readyState == 4 && this.status == 200)
 				{
 					let jsonObject = JSON.parse(xhr.responseText);
-					// let ID = jsonObject["ID"];
-					// newRow.dataset.id = ID;
 					console.log("Contact Added!");
 					loadContacts();
-					document.getElementById("clearForm", "addContact").reset();
+					document.getElementById("clearForm").reset();
 				}
 			};
 			xhr.send(jsonPayload);
@@ -570,7 +494,7 @@ function updateContact(contactID) {
 					let jsonObject = JSON.parse(xhr.responseText);
 					console.log("Contact Updated!");
 					loadContacts();
-					clearForm("clearForm" + contactID, "editContact" + contactID);
+					clearForm("clearForm-" + contactID, "editContact" + contactID);
 				}
 			};
 
