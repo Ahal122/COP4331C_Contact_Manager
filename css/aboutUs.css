@@ -1,0 +1,49 @@
+/* Start of Navigation bar */
+.topnav {
+  background-color: #F8B195;
+  overflow: auto;
+  width: 100%;
+}
+
+.nav-button {
+  float: right;
+  border-radius: 17px;
+  text-transform: uppercase;
+  background: #8e6656;
+  box-shadow: 0 0 25px 0 rgba(137, 114, 97, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  width: 180px;
+  height: 55px;
+  padding: 15px;
+  color: #FFFFFF;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  margin-right: 18px;
+  margin-top: 10px;
+  border: 0;
+}
+
+.nav-button:hover {
+  background: #f2f2f2;
+  color: black;
+  text-decoration: underline;
+}
+
+h2{
+  font-weight: bold;
+}
+
+.page-header {
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 45px;
+  margin:10px;
+}
+/* End of navigation bar */
+
+.ashley{
+    background-image: url('../images/ashley.jpg');
+}

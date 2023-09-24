@@ -4,6 +4,7 @@ const extension = 'php';
 let userId = 0;
 let firstName = "";
 let lastName = "";
+const ids = [];
 
 function doLogin()
 {
@@ -43,12 +44,11 @@ function doLogin()
 
 				firstName = jsonObject.FirstName;
 				lastName = jsonObject.LastName;
-
 				saveCookie();
 
 				// used to be color.html
 				window.location.href = "contacts.html";
-        loadContacts();
+				loadContacts();
 			}
 		};
 		xhr.send(jsonPayload);
@@ -87,9 +87,10 @@ function readCookie()
 		{
 			lastName = tokens[1];
 		}
-		else if( tokens[0] == "Login" )
+		else if( tokens[0] == "UserId" )
 		{
 			userId = parseInt( tokens[1].trim() );
+			return userId;
 		}
 	}
 
@@ -229,11 +230,12 @@ function showTable()
 
 function loadContacts()
 {
+  let userId = readCookie();
   let tmp = 
   {
     FirstName: "",
     LastName: "",
-    UserID: 1
+    UserID: userId
   };
   
   let jsonPayload = JSON.stringify(tmp);
@@ -250,36 +252,66 @@ function loadContacts()
       if (this.readyState == 4 && this.status == 200) 
       {
         let jsonObject = JSON.parse(xhr.responseText);
-        console.log(xhr.responseText);
+        //console.log(xhr.responseText);
         if (jsonObject.error) 
         {
           console.log(jsonObject.error);
           return;
         }
         
-        //let text = "<table border='1'>"
+        let text = ""
         
         for (let i = 0; i < jsonObject.results.length; i++) 
         {
           ids[i] = jsonObject.results[i].ID
-          text += "<tr id='row" + i + "'>"
-          text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
-          text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
-          text += "<td id='email" + i + "'><span>" + jsonObject.results[i].EmailAddress + "</span></td>";
-          text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].PhoneNumber + "</span></td>";
+  		  //console.log(ids);
+		  text += edit(ids[i]);
+          text += "<tr id='row" + ids[i] + "'>"
+          text += "<td id='first_Name" + ids[i] + "'>" + jsonObject.results[i].FirstName + "</td>";
+          text += "<td id='last_Name" + ids[i] + "'>" + jsonObject.results[i].LastName + "</td>";
+          text += "<td id='email" + ids[i] + "'>" + jsonObject.results[i].Email + "</td>";
+          text += "<td id='phone" + ids[i] + "'>" + jsonObject.results[i].Phone + "</td>";
           text += "<td>" +
-            "<button type='button' id='edit_button" + i + "' onclick='edit_row(" + i + ")'>" + "<span></span>" + "</button>" +
-            //"<button type='button' id='save_button" + i + "' onclick='save_row(" + i + ")' style='display: none'>" + "<span></span>" + "</button>" +
-            "<button type='button' id='delete_button" + i + "' onclick='delete_row(" + i + ")' >" + "<span></span> " + "</button>" + "</td>";
+            "<button type='button' class='btn btn-primary float-right' data-bs-toggle='modal' data-bs-target='#editContact" + ids[i] + "' id='btn" + i + "' onclick='edit(" + ids[i] + ")'>Edit</button>" +
+            "<button type='button' class='btn btn-danger float-right' id='btn" + i + "' onclick='deleteContact(" +  ids[i] + ")'>Delete</button>" + "</td>";
             
             text += "<tr/>"
         }
         
         text += "</table>"
         document.getElementById("tbody").innerHTML = text;
+		
+		// var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+		// var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+		// return new bootstrap.Popover(popoverTriggerEl, {trigger: 'manual'});
+
+		// 	popoverTriggerEl.addEventListener('input', function() {
+		// 		// If the input has a value, hide the popover
+		// 		if (popoverTriggerEl.value.trim()) {
+		// 			popoverInstance.hide();
+		// 		}
+		// 	});
+		// });
+
+		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+			const popover = new bootstrap.Popover(popoverTriggerEl, {
+				trigger: 'manual' // Set the trigger to manual
+			});
+	
+			// Event listener for input changes
+			popoverTriggerEl.addEventListener('input', function() {
+				// If the input has a value, hide the popover
+				if (popoverTriggerEl.value.trim()) {
+					popover.hide();
+				}
+			});
+	
+			return popover;
+		});
+
       }
     };
-    
     xhr.send(jsonPayload);
     
   } 
@@ -289,81 +321,179 @@ function loadContacts()
   }
 }
 
-function addContact()
-{
-	let firstName = document.getElementById("contactFirstName").value;
-	let lastName = document.getElementById("contactLastName").value;
-	let phoneNumber = document.getElementById("contactPhone").value;
-	let emailAddress = document.getElementById("contactEmail").value;
-	let userId = userId;
 
-	let tmp =
-	{
-		FirstName: firstName,
-		LastName: lastName,
-		Phone: phoneNumber,
-		Email: emailAddress,
-        UserID: userId
-	};
- 
+	function edit(ID) {
+		form = "";
 
-	let contactTableNew = document.getElementById("contactTable");
-	let newRow = document.createElement("tr");
+		form += "<div class='modal fade' id='editContact"+ ID + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>" +
+		"    <div class='modal-dialog' role='document'>" +                                                                                            
+		"      <div class='modal-content'>" +                                                                                                         
+		"        <div class='modal-header text-center'>" +                                                                                            
+		"          <h5 class='header' id='exampleModalLongTitle'>Update Contact</h5>" +                                                              
+		"          <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'>" +                                                 
+		"            <span aria-hidden='true'>&times;</span>" +                                                                                       
+		"          </button>" +                                                                                                                       
+		"        </div>" +                                                                                                                            
+		"        <div class='modal-body'>" +                                                                                                          
+		"            <form id='clearForm" + ID + "' class='form' method='post'>" +                                                                             
+		"                <div>" +                                                                                                                     
+		"                    <label class='floating-label'>First Name</label>" +                                                                      
+		"                    <input class='inputText' type='text' id='contactFirstName"+ ID + "' placeholder='Enter First Name' name='firstName' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a first name.'>" +  
+		"                </div>" +                                                                                                                    
+		"                <div>" +                                                                                                                     
+		"                    <label class='floating-label'>Last Name</label>" +                                                                       
+		"                    <input class='inputText' type='text' id='contactLastName"+ ID + "' placeholder='Enter Last Name' name='lastName' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a Last name.'>" +     
+		"                </div>" +                                                                                                                    
+		"                <div>" +                                                                                                                     
+		"                    <label class='floating-label'>Phone Number</label>" +                                                                    
+		"                    <input class='inputText' type='text' id='contactPhone"+ ID + "' placeholder='Enter Phone' name='phoneNumber' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a Phone Number.'>" +         
+		"                </div>" +                                                                                                                    
+		"                <div>" +                                                                                                                     
+		"                    <label class='floating-label'>Email Address</label>" +                                                                   
+		"                    <input class='inputText' type='text' id='contactEmail"+ ID + "' placeholder='Enter Email' name='emailAddress' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter an Email.'>" +        
+		"                </div>" +                                                                                                                    
+		"            </form>" +                                                                                                                       
+		"        </div>" +                                                                                                                            
+		"        <div class='modal-footer'>" +                                                                                                        
+		"          <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' onclick='clearForm('clearForm" + ID + "' , 'editContact"+ ID + "')'>Close</button>" +                                          
+		"          <button type='submit' class='btn btn-primary' onclick='updateContact(" + ID + ")'>Save changes</button>" +                                      
+		"        </div>" +                                                                                                                            
+		"      </div>" +                                                                                                                              
+		"    </div>" +
+		"   </div>";    
+		
+		return form;
+	}
+		
 
-	let fn = document.createElement("td");
-	let ln = document.createElement("td");
-	let phoneNum = document.createElement("td");
-	let email = document.createElement("td");
+function deleteContact(contactID)
+ {
+	var firstNameVal = document.getElementById("first_Name" + contactID).innerText;
+    var lastNameVal = document.getElementById("last_Name" + contactID).innerText;
 
-	fn.innerText = firstName;
-	ln.innerText = lastName;
-	phoneNum.innerText = phoneNumber;
-	email.innerText = emailAddress;
+	nameOne = firstNameVal.substring(0, firstNameVal.length);
+    nameTwo = lastNameVal.substring(0, lastNameVal.length);
+    let check = confirm('Confirm deletion of contact: ' + nameOne + ' ' + nameTwo);
 
-	newRow.appendChild(fn);
-	newRow.appendChild(ln);
-	newRow.appendChild(phoneNum);
-	newRow.appendChild(email);
-
-	contactTableNew.appendChild(newRow);
-    //closeForm();
-    //document.getElementById("myForm").reset();
-
-    let jsonPayload = JSON.stringify(tmp);
-	let url = urlBase + '/addContacts.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
- 
-	try
-	{
-		xhr.onreadystatechange = function ()
-		{
-     console.log(this.readyState);
-     console.log(this.status);
-			if (this.readyState == 4 && this.status == 200)
-			{
-				console.log("Contact Added!");
-				showTable();
-				//document.getElementById("myForm").reset();
-			}
+	if(check === true) {
+		document.getElementById("row" + contactID + "").innerHTML = "";
+		let tmp = {
+			ID: contactID
 		};
-		xhr.send(jsonPayload);
+
+		let jsonPayload = JSON.stringify(tmp);
+
+		let url = urlBase + '/deleteContacts.' + extension;
+
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		try {
+			xhr.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					loadContacts();
+				}
+			};
+			xhr.send(jsonPayload);
+		} catch (err) {
+			console.log(err.message);
+
+		};
+
 	}
 
-	catch (err)
-	{
-		console.log(err.message);
-    }
+}
+
+function clearForm(formID, modalClearID){
+	var myModalEl = document.getElementById(modalClearID);
+	var modal = bootstrap.Modal.getInstance(myModalEl)
+	modal.hide();
+	document.getElementById(formID).reset();
+}
+
+function addContact()
+{
+	let allValid = true;
+	fieldsToValidate = ['contactFirstName', 'contactLastName', 'contactPhone', 'contactEmail'];
+
+    // Validate each field
+    fieldsToValidate.forEach(function (fieldId) {
+        const field = document.getElementById(fieldId);
+        const popoverInstance = bootstrap.Popover.getInstance(field);
+
+        if (!field.value.trim()) {
+            // If the popover is not visible, show it
+            if (!popoverInstance._popper) {
+                popoverInstance.show();
+            }
+			allValid = false;
+        } else {
+            // If the popover is visible, hide it
+            if (popoverInstance._popper) {
+                popoverInstance.hide();
+            }
+        }
+    });
+
+	
+	if(allValid){
+		var myModalEl = document.getElementById('addContact');
+		var modal = bootstrap.Modal.getInstance(myModalEl)
+		modal.hide();
+
+		let firstName = document.getElementById("contactFirstName").value;
+		let lastName = document.getElementById("contactLastName").value;
+		let phoneNumber = document.getElementById("contactPhone").value;
+		let emailAddress = document.getElementById("contactEmail").value;
+		let userId = readCookie();
+		
+		let tmp =
+		{
+			FirstName: firstName,
+			LastName: lastName,
+			Phone: phoneNumber,
+			Email: emailAddress,
+			UserID: userId
+		};
+
+		let jsonPayload = JSON.stringify(tmp);
+		let url = urlBase + '/addContacts.' + extension;
+
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	
+		try
+		{
+			xhr.onreadystatechange = function ()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					let jsonObject = JSON.parse(xhr.responseText);
+					// let ID = jsonObject["ID"];
+					// newRow.dataset.id = ID;
+					console.log("Contact Added!");
+					loadContacts();
+					document.getElementById("clearForm", "addContact").reset();
+				}
+			};
+			xhr.send(jsonPayload);
+		}
+
+		catch (err)
+		{
+			console.log(err.message);
+		}
+	}
 }
 
 function searchContacts()
 {
-	const searchBar = document.getElementById("searchText");
+	const searchBar = document.getElementById("searchKey");
 	const selections = searchBar.value.toUpperCase().split(' ');
 	const contactTable = document.getElementById("contactTable");
-	const tableRow = table.getElementsByTagName("tr");
+  const tableRow = contactTable.getElementsByTagName("tr");
+
 
 	for (let i = 0; i < tableRow.length; i++) {
 		const firstNameSearch = tableRow[i].getElementsByTagName("td")[0];
@@ -386,3 +516,126 @@ function searchContacts()
 	}
 	
 }
+
+
+function updateContact(contactID) {
+
+	let allValid = true;
+	fieldsToValidate = ['contactFirstName' + contactID, 'contactLastName' + contactID, 'contactPhone' + contactID, 'contactEmail' + contactID];
+
+    // Validate each field
+    fieldsToValidate.forEach(function (fieldId) {
+        const field = document.getElementById(fieldId);
+        const popoverInstance = bootstrap.Popover.getInstance(field);
+
+        if (!field.value.trim()) {
+            // If the popover is not visible, show it
+            if (!popoverInstance._popper) {
+                popoverInstance.show();
+            }
+			allValid = false;
+        } else {
+            // If the popover is visible, hide it
+            if (popoverInstance._popper) {
+                popoverInstance.hide();
+            }
+        }
+    });
+
+	if(allValid){
+		let firstName = document.getElementById("contactFirstName" + contactID).value;
+		let lastName = document.getElementById("contactLastName" + contactID).value;
+		let phoneNumber = document.getElementById("contactPhone" + contactID).value;
+		let emailAddress = document.getElementById("contactEmail" + contactID).value;
+		
+		let updatePayload =
+		{
+			ID: contactID,
+			FirstName: firstName,
+			LastName: lastName,
+			Phone: phoneNumber,
+			Email: emailAddress,
+		};
+		
+		let jsonPayload = JSON.stringify(updatePayload);
+		let url = urlBase + '/updateContacts.' + extension;
+		
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		try {
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200)
+				{
+					let jsonObject = JSON.parse(xhr.responseText);
+					console.log("Contact Updated!");
+					loadContacts();
+					clearForm("clearForm" + contactID, "editContact" + contactID);
+				}
+			};
+
+			xhr.send(jsonPayload);
+		} catch (err) {
+			console.log(err.msg);
+		}
+	}
+}
+
+function validateForm(event, formType) {
+
+    event.preventDefault();
+
+	let allValid = true;
+
+	let fieldsToValidate = formType === "login" ? ['Login', 'Password'] : ['FirstName', 'LastName', 'Login', 'Password'];
+
+    // Validate each field
+    fieldsToValidate.forEach(function (fieldId) {
+        const field = document.getElementById(fieldId);
+        const popoverInstance = bootstrap.Popover.getInstance(field);
+
+        if (!field.value.trim()) {
+            // If the popover is not visible, show it
+            if (!popoverInstance._popper) {
+                popoverInstance.show();
+            }
+			allValid = false;
+        } else {
+            // If the popover is visible, hide it
+            if (popoverInstance._popper) {
+                popoverInstance.hide();
+            }
+        }
+    });
+
+	if(allValid) {
+		if(formType === "login") {
+			doLogin();
+		} else {
+			addUser();
+		}
+
+	}
+
+    // If all fields are valid, you can call the addUser function or other actions.
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize popovers
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        const popover = new bootstrap.Popover(popoverTriggerEl, {
+            trigger: 'manual' // Set the trigger to manual
+        });
+
+        // Event listener for input changes
+        popoverTriggerEl.addEventListener('input', function() {
+            // If the input has a value, hide the popover
+            if (popoverTriggerEl.value.trim()) {
+                popover.hide();
+            }
+        });
+
+        return popover;
+    });
+});
