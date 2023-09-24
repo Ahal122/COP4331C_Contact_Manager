@@ -1,47 +1,47 @@
 <?php
-	$inData = getRequestInfo();
-		
-	$firstName = $inData["FirstName"];
-	$lastName = $inData["LastName"];
-	$phoneNumber = $inData["Phone"];
-	$emailAddress = $inData["Email"];
-	$userId = $inData["UserID"];
-	
+    $inData = getRequestInfo();
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
-	if ($conn->connect_error)
-	{
-			returnWithError( $conn->connect_error );
-	}
-	else
-	{
-			$stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, Phone, Email, UserID) VALUES('$firstName','$lastName','$phoneNumber','$emailAddress','$userId')");
-			$stmt->execute();
-			$stmt->close();
-			$conn->close();
-			returnWithInfo($firstName, $lastName, $phoneNumber, $emailAddress, $userId);
-	}
+    $firstName = $inData["FirstName"];
+    $lastName = $inData["LastName"];
+    $phoneNumber = $inData["Phone"];
+    $emailAddress = $inData["Email"];
+    $userId = $inData["UserID"];
+    $ID = 0;
 
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
+    $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+    if ($conn->connect_error) {
+        returnWithError($conn->connect_error);
+    } else {
+        $stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, Phone, Email, UserID) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssi", $firstName, $lastName, $phoneNumber, $emailAddress, $userId);
+        
+        if ($stmt->execute()) {
+            $ID = $conn->insert_id;
+            returnWithInfo($ID, $firstName, $lastName, $phoneNumber, $emailAddress, $userId);
+        } else {
+            returnWithError($stmt->error);
+        }
+        
+        $stmt->close();
+        $conn->close();
+    }
 
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
+    function getRequestInfo() {
+        return json_decode(file_get_contents('php://input'), true);
+    }
 
-	function returnWithError( $err )
-	{
-		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
+    function sendResultInfoAsJson($obj) {
+        header('Content-type: application/json');
+        echo $obj;
+    }
 
-	function returnWithInfo($firstName, $lastName, $phoneNumber, $emailAddress, $userId)
-	{
-		$retValue = '{"FirstAdded":"' . $firstName . '", "LastAdded":"' . $lastName . '", "PhoneAdded":"' . $phoneNumber . '", "EmailAdded":"' . $emailAddress . '", "IdAdded":' . $userId . ', "error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
+    function returnWithError($err) {
+        $retValue = '{"error":"' . $err . '"}';
+        sendResultInfoAsJson($retValue);
+    }
+
+    function returnWithInfo($ID, $firstName, $lastName, $phoneNumber, $emailAddress, $userId) {
+        $retValue = '{"ID":"' . $ID . '", "FirstAdded":"' . $firstName . '", "LastAdded":"' . $lastName . '", "PhoneAdded":"' . $phoneNumber . '", "EmailAdded":"' . $emailAddress . '", "IdAdded":' . $userId . ', "error":""}';
+        sendResultInfoAsJson($retValue);
+    }
 ?>
