@@ -139,6 +139,7 @@ input:focus {
   margin-top: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 16px;
+  font-weight: bold;
 }
 /* login form end*/
 
