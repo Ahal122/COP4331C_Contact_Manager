@@ -207,7 +207,7 @@ function loadContacts()
 			text += "<td id='email" + ids[i] + "'>" + jsonObject.results[i].Phone + "</td>";
 			text += "<td id='phone" + ids[i] + "'>" + jsonObject.results[i].Email + "</td>";
 			text += "<td>" +
-				"<button type='button' class='btn btn-primary float-right' data-bs-toggle='modal' data-bs-target='#editContact" + ids[i] + "' id='btn" + i + "' onclick='edit(" + ids[i] + ")'>Edit</button>" +
+				"<button type='button' class='btn btn-primary float-right' data-bs-toggle='modal' data-bs-target='#editContact" + ids[i] + "' id='btn" + i + "'>Edit</button>" +
 				"<button type='button' class='btn btn-danger float-right' id='btn" + i + "' onclick='deleteContact(" +  ids[i] + ")'>Delete</button>" + "</td>";
 				
 				text += "<tr/>"
@@ -258,7 +258,7 @@ function edit(ID, firstName, lastName, phone, email) {
 	"          </button>" +                                                                                                                       
 	"        </div>" +                                                                                                                            
 	"        <div class='modal-body'>" +                                                                                                          
-	"            <form id='clearForm-" + ID + "' class='form' method='post'>" +                                                                             
+	"            <form id='clearForm-" + ID + "' class='formEdit' method='post'>" +                                                                             
 	"                <div>" +                                                                                                                     
 	"                    <label class='floating-label'>First Name</label>" +                                                                      
 	"                    <input class='inputText' type='text' id='contactFirstName"+ ID + "' placeholder='Enter First Name' value='" + firstName + "' name='firstName' data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-content='Please enter in a first name.'>" +  

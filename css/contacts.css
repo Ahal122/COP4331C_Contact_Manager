@@ -100,7 +100,7 @@ col {
 .search-button {
     border-radius: 10px;
     padding: 10px;
-    background: #ffbba085;
+    background: #f8b195bd;
     margin-right: 5px;
     border: 1;
     border-color: #8e665652;
@@ -114,7 +114,7 @@ col {
 .refresh-button {
     border-radius: 10px;
     padding: 10px;
-    background: #ffbba085;
+    background: #f8b195bd;
     margin-right: 5px;
     border: 1;
     border-color: #8e665652;
@@ -128,6 +128,10 @@ col {
 
 
 /* Start of Add Contacts Form */
+.modal-body{
+    text-align: center;
+}
+
 form{
     text-align: center;
 }
@@ -135,7 +139,8 @@ form{
 .header{
     text-align: center;
     font-size: 40px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif ;  
+    font-family: Verdana, Geneva, Tahoma, sans-serif ; 
+    padding-left: 59px; 
   }
 
   .floating-label {
@@ -271,6 +276,16 @@ th{
     padding: 1rem;
     text-align: left;
     font-size: 22px; 
+}
+
+tr{
+    border-width: 1;
+    border-bottom: #2c5172;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+tr:nth-child(even) {
+    background-color:rgb(255 255 255 / 48%);
 }
 
 tbody td{
