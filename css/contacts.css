@@ -1,4 +1,7 @@
 /* Start of Navigation bar */
+h1,h2{
+    font-weight: bold;
+}
 .topnav {
     background-color: #F8B195;
     overflow: auto;
@@ -137,7 +140,8 @@ form{
 
   .floating-label {
     position: absolute;
-    font-family: Verdana, Geneva, Tahoma, sans-serif ;    
+    font-family: Verdana, Geneva, Tahoma, sans-serif ;   
+    font-weight: bold; 
   }
   
   input:focus {
@@ -187,13 +191,17 @@ form{
     }
 }
 
+/* Max width of table for large screens */
+@media screen and (min-width: 600px){
 /* default width */
-.wrapper{
-    width: min(1600px, 100% - 3rem);
-    height: min(100px, 100% - 3rem);
-    margin-top: 10px;
-    margin-inline: auto;
+    .wrapper{
+        width: min(1600px, 100% - 3rem);
+        height: min(100px, 100% - 3rem);
+        margin-top: 10px;
+        margin-inline: auto;
+    }
 }
+
 
 .table{
     width: 2000px; /* 140px * 5 column + 16px scrollbar width */
@@ -206,12 +214,14 @@ form{
 }
 .secondCol{
     padding-right: 0px;
+    padding-left: 35px;
 }
 .thirdCol{
-    padding-right: 180px;
+    padding-right: 160px;
+    padding-left: 23px;
 }
 .fourthCol{
-    padding-right: 175px;
+    padding-right: 205px;
 }
 .fifthCol{
     padding-right: 110px;

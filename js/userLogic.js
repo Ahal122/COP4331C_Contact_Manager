@@ -162,83 +162,86 @@ function addUser()
 
 function loadContacts()
 {
-  let userId = readCookie();
-  let tmp = 
-  {
-    FirstName: "",
-    LastName: "",
-    UserID: userId
-  };
-  
-  let jsonPayload = JSON.stringify(tmp);
-  
-  let url = urlBase + '/searchContacts.' + extension;
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-  
-  try 
-  {
-    xhr.onreadystatechange = function () 
-    {
-      if (this.readyState == 4 && this.status == 200) 
-      {
-        let jsonObject = JSON.parse(xhr.responseText);
-        //console.log(xhr.responseText);
-        if (jsonObject.error) 
-        {
-          console.log(jsonObject.error);
-          return;
-        }
-        
-        let text = ""
-        
-        for (let i = 0; i < jsonObject.results.length; i++) 
-        {
-          ids[i] = jsonObject.results[i].ID
-  		  //console.log(ids);
-		  text += edit(ids[i] , jsonObject.results[i].FirstName, jsonObject.results[i].LastName, jsonObject.results[i].Phone, jsonObject.results[i].Email);
-          text += "<tr id='row" + ids[i] + "'>"
-          text += "<td id='first_Name" + ids[i] + "'>" + jsonObject.results[i].FirstName + "</td>";
-          text += "<td id='last_Name" + ids[i] + "'>" + jsonObject.results[i].LastName + "</td>";
-          text += "<td id='email" + ids[i] + "'>" + jsonObject.results[i].Phone + "</td>";
-          text += "<td id='phone" + ids[i] + "'>" + jsonObject.results[i].Email + "</td>";
-          text += "<td>" +
-            "<button type='button' class='btn btn-primary float-right' data-bs-toggle='modal' data-bs-target='#editContact" + ids[i] + "' id='btn" + i + "' onclick='edit(" + ids[i] + ")'>Edit</button>" +
-            "<button type='button' class='btn btn-danger float-right' id='btn" + i + "' onclick='deleteContact(" +  ids[i] + ")'>Delete</button>" + "</td>";
-            
-            text += "<tr/>"
-        }
-        
-        text += "</table>"
-        document.getElementById("tbody").innerHTML = text;
-
-		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-			const popover = new bootstrap.Popover(popoverTriggerEl, {
-				trigger: 'manual' // Set the trigger to manual
-			});
+	// Clears search box after pressing refresh
+	document.getElementById("searchKey").value = "";
 	
-			// Event listener for input changes
-			popoverTriggerEl.addEventListener('input', function() {
-				// If the input has a value, hide the popover
-				if (popoverTriggerEl.value.trim()) {
-					popover.hide();
-				}
-			});
+	let userId = readCookie();
+	let tmp = 
+	{
+		FirstName: "",
+		LastName: "",
+		UserID: userId
+	};
 	
-			return popover;
-		});
+	let jsonPayload = JSON.stringify(tmp);
+	
+	let url = urlBase + '/searchContacts.' + extension;
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	
+	try 
+	{
+		xhr.onreadystatechange = function () 
+		{
+		if (this.readyState == 4 && this.status == 200) 
+		{
+			let jsonObject = JSON.parse(xhr.responseText);
+			//console.log(xhr.responseText);
+			if (jsonObject.error) 
+			{
+			console.log(jsonObject.error);
+			return;
+			}
+			
+			let text = ""
+			
+			for (let i = 0; i < jsonObject.results.length; i++) 
+			{
+			ids[i] = jsonObject.results[i].ID
+			//console.log(ids);
+			text += edit(ids[i] , jsonObject.results[i].FirstName, jsonObject.results[i].LastName, jsonObject.results[i].Phone, jsonObject.results[i].Email);
+			text += "<tr id='row" + ids[i] + "'>"
+			text += "<td id='first_Name" + ids[i] + "'>" + jsonObject.results[i].FirstName + "</td>";
+			text += "<td id='last_Name" + ids[i] + "'>" + jsonObject.results[i].LastName + "</td>";
+			text += "<td id='email" + ids[i] + "'>" + jsonObject.results[i].Phone + "</td>";
+			text += "<td id='phone" + ids[i] + "'>" + jsonObject.results[i].Email + "</td>";
+			text += "<td>" +
+				"<button type='button' class='btn btn-primary float-right' data-bs-toggle='modal' data-bs-target='#editContact" + ids[i] + "' id='btn" + i + "' onclick='edit(" + ids[i] + ")'>Edit</button>" +
+				"<button type='button' class='btn btn-danger float-right' id='btn" + i + "' onclick='deleteContact(" +  ids[i] + ")'>Delete</button>" + "</td>";
+				
+				text += "<tr/>"
+			}
+			
+			text += "</table>"
+			document.getElementById("tbody").innerHTML = text;
 
-      }
-    };
-    xhr.send(jsonPayload);
-    
-  } 
-  catch (err) 
-  {
-    console.log(err.message);
-  }
+			var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+			var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+				const popover = new bootstrap.Popover(popoverTriggerEl, {
+					trigger: 'manual' // Set the trigger to manual
+				});
+		
+				// Event listener for input changes
+				popoverTriggerEl.addEventListener('input', function() {
+					// If the input has a value, hide the popover
+					if (popoverTriggerEl.value.trim()) {
+						popover.hide();
+					}
+				});
+		
+				return popover;
+			});
+
+		}
+		};
+		xhr.send(jsonPayload);
+		
+	} 
+	catch (err) 
+	{
+		console.log(err.message);
+	}
 }
 
 
@@ -416,7 +419,7 @@ function searchContacts()
 	const searchBar = document.getElementById("searchKey");
 	const selections = searchBar.value.toUpperCase().split(' ');
 	const contactTable = document.getElementById("contactTable");
-  const tableRow = contactTable.getElementsByTagName("tr");
+    const tableRow = contactTable.getElementsByTagName("tr");
 
 
 	for (let i = 0; i < tableRow.length; i++) {
