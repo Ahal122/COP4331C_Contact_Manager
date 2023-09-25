@@ -1,4 +1,8 @@
 /* Start of Navigation bar */
+h2{
+  font-weight: bold;
+}
+
 .topnav {
   background-color: #F8B195;
   overflow: auto;
@@ -24,6 +28,7 @@
   margin-right: 18px;
   margin-top: 10px;
   border: 0;
+  font-weight: bold;
 }
 
 .nav-button:hover {
@@ -49,8 +54,8 @@
   top: 25px;
   position: relative;
   padding: 20px;
-  width: 280px;
-  height: 400px;
+  width: 410px;
+  height: 550px;
 }
     
 

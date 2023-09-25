@@ -275,7 +275,7 @@ function edit(ID, firstName, lastName, phone, email) {
 	"            </form>" +                                                                                                                       
 	"        </div>" +                                                                                                                            
 	"        <div class='modal-footer'>" +                                                                                                        
-	"          <button type='submit' class='btn btn-secondary' onclick='clearEditForm(" + ID + ")'>Cancel</button>" +                                      
+	"          <button type='submit' class='btn btn-outline-secondary' onclick='clearEditForm(" + ID + ")'>Cancel</button>" +                                      
 	"          <button type='submit' class='btn btn-primary' onclick='updateContact(" + ID + ")'>Save changes</button>" +                                      
 	"        </div>" +                                                                                                                            
 	"      </div>" +                                                                                                                              
