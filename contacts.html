@@ -1,12 +1,13 @@
 <html>
 
     <head>
-        <script type="text/javascript" src="js/userLogic.js"></script>
-        <link rel="stylesheet" type="text/css" href="../css/contacts.css" />
         <title>User login</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/1a333fc90e.js" crossorigin="anonymous"></script>
+
+        <script type="text/javascript" src="js/userLogic.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/contacts.css" />
     
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {
@@ -16,7 +17,7 @@
         </script>
 
     </head>
-    <body style=" background-color: #f8b195;">
+    <body style=" background-color: #f8b195;" >
     </body>
 
     <div class="topnav">
@@ -61,10 +62,10 @@
                             <label class="floating-label">Email Address</label>
                             <input class="inputText" type="text" id="contactEmail" placeholder="Enter Email" name="emailAddress" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Please enter in a Email">
                         </div>
-                    </form>
+                    </forma>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearForm('clearForm')">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearForm('clearForm', 'addContact')">Close</button>
                     <button type="button" class="btn btn-primary" onclick="addContact()">Add Contact</button>
                 </div>
             </div>
@@ -83,11 +84,11 @@
                 <h1 class="upper-table-header">CONTACTS</h1>
             </div>
 
-            <div class="container">
+            <div class="container-fluid" style="background-color: #ffffff;">
                 
                 <div class="row align-items-center">
                     
-                    <div class="col">
+                    <div class="col-4">
                         <button class="add-button float-right" type="button" data-bs-toggle='modal' data-bs-target="#addContact">Add</button>
                     </div>
                     
@@ -95,26 +96,26 @@
                         <input type="text" id="searchKey" class="search-box"  placeholder="Search..." />                                                 
                     </div>
 
-                    <div class="col">
-                        <button type="button" class="search-button" onclick="searchContacts()"> <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
-                        <button class="refresh-button" onclick="loadContacts()"><i class="fa-solid fa-arrows-rotate" style="color: #ffffff;"></i></button>                                    
+                    <div class="col-4 col-override">
+                        <button type="button" class="search-button" onclick="searchContacts()"> <i class="fa-solid fa-magnifying-glass" style="color: #2a1f1a;"></i></button>
+                        <button class="refresh-button" onclick="loadContacts()"><i class="fa-solid fa-arrows-rotate" style="color: #2a1f1a;"></i></button>                                    
                     </div>
 
                 </div>
 
-            </div>
+            </div class="" style="min-height:100px;max-height:200px;">
 
-                <table class="" id="contactTable">         
-                    <thead>
+                <table class="tableFormat" id="contactTable">         
+                    <thead class="thead">
                         <tr>
-                            <th scope="col" style="color:white">First Name</th>
-                            <th scope="col" style="color:white">Last Name</th>
-                            <th scope="col" style="color:white">Phone Number</th>
-                            <th scope="col" style="color:white">Email Address</th>
-                            <th scope="col" style="color:white">Actions</th>
+                            <th class="firstCol" style="color:white">First Name</th>
+                            <th class="secondCol" style="color:white">Last Name</th>
+                            <th class="thirdCol" style="color:white">Phone Number</th>
+                            <th class="fourthCol" style="color:white">Email Address</th>
+                            <th class="fifthCol" style="color:white">Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="tbody">                    
+                    <tbody class="tablewrapper" id="tbody">                    
                     </tbody>                                        
                 </table> 
 

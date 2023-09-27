@@ -1,4 +1,7 @@
 /* Start of Navigation bar */
+h2{
+  font-weight: bold;
+}
 .topnav {
   background-color: #F8B195;
   overflow: auto;
@@ -24,6 +27,7 @@
   margin-right: 18px;
   margin-top: 10px;
   border: 0;
+  font-weight: bold;
 }
 
 .nav-button:hover {
@@ -49,8 +53,8 @@
   top: 25px;
   position: relative;
   padding: 20px;
-  width: 300px;
-  height: 600px;
+  width: 410px;
+  height: 735px;
   
 }  
 
@@ -72,7 +76,7 @@
 }
 
 .header{
-  font-size: 35px;
+  font-size: 41px;
   font-family: Verdana, Geneva, Tahoma, sans-serif ; 
   margin-top: 16px;
   margin-bottom: 26px; 
@@ -82,7 +86,9 @@
 
 .floating-label {
   position: absolute;
-  font-family: Verdana, Geneva, Tahoma, sans-serif ;    
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: bold; 
 }
 
 input:focus {
@@ -91,17 +97,17 @@ input:focus {
 
 .inputText {
   border-radius: 17px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif ;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   background: #f2f2f2;
   width: 100%;
-  height: 55px;
+  height: 60px;
   margin: 0 0 15px;
-  margin-bottom: 10px;
-  margin-top: 12px;
+  margin-bottom: 36px;
+  margin-top: 34px;
   padding: 15px;
   box-sizing: border-box;
-  font-size: 16px;
-  text-decoration: solid; 
+  font-size: 20px;
+  text-decoration: solid;
   position: relative;
 }
 
@@ -124,8 +130,9 @@ input:focus {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
-  margin-top: 25px;
+  margin-top: 5px;
   border: 0;
+  font-weight: bold;
 }
 
 .text {
@@ -136,8 +143,10 @@ input:focus {
 }
 
 label {
-  margin-left: 8px;
-  margin-bottom: -12px;
+  position: absolute;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: bold;    
 }
 
 
